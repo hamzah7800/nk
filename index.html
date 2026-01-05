@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NKBouquets | Fresh Roses</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff5f7;
+      color: #333;
+    }
+
+    header {
+      background: #b1124a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .hero h2 {
+      margin-top: 20px;
+      font-size: 2rem;
+      color: #b1124a;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      margin: 10px 0 20px;
+      font-weight: bold;
+    }
+
+    .order-box {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .order-box h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .order-box input,
+    .order-box textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .order-box textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    footer {
+      background: #2b0a15;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+      font-size: 0.9rem;
+    }
+
+    .paypal-btn {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>NKBouquets</h1>
+  <p>Handcrafted Rose Bouquets • Fresh • Elegant</p>
+</header>
+
+<div class="container">
+
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1526045478516-99145907023c" alt="Rose Bouquet">
+    <h2>Luxury Rose Bouquet</h2>
+    <p class="price">£25.00</p>
+  </div>
+
+  <div class="order-box">
+    <h3>Place Your Order</h3>
+
+    <!-- ORDER DETAILS (SENT TO PAYPAL) -->
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+      <!-- PayPal Settings -->
+      <input type="hidden" name="cmd" value="_xclick">
+      <input type="hidden" name="business" value="hzeb0733@gmail.com">
+      <input type="hidden" name="item_name" value="NKBouquets - Rose Bouquet">
+      <input type="hidden" name="currency_code" value="GBP">
+      <input type="hidden" name="amount" value="25.00">
+
+      <!-- Customer Info -->
+      <input type="text" name="custom" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="note" placeholder="Delivery notes (address, message, date)" required></textarea>
+
+      <!-- PAYPAL BUTTON -->
+      <div class="paypal-btn">
+        <input type="image"
+          src="https://www.paypalobjects.com/en_GB/i/btn/btn_buynowCC_LG.gif"
+          border="0"
+          name="submit"
+          alt="Pay with PayPal">
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 NKBouquets • Fresh Roses Made With Love 🌹
+</footer>
+
+</body>
+</html>
