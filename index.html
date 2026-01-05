@@ -3,195 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NKBouquets | Luxury Roses</title>
-
-<!-- PAYPAL LIVE SDK -->
-<!-- 🔴 REPLACE YOUR_LIVE_CLIENT_ID with your real PayPal LIVE client ID -->
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_LIVE_CLIENT_ID&currency=GBP"></script>
+<title>NKBouquets | Order & Pay</title>
 
 <style>
 :root {
   --primary: #b1124a;
   --bg: #fff5f7;
-  --dark: #2b0a15;
+  --paypal-blue: #0070ba;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: var(--bg);
   color: #222;
+  line-height: 1.6;
 }
 
-/* ---------- QR CODE ---------- */
-.qr-float {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  background: white;
-  padding: 8px;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-  z-index: 999;
-  transition: transform 0.2s ease;
-  will-change: transform;
-}
-
-.qr-float:hover {
-  transform: scale(1.05);
-}
-
-.qr-float img {
-  width: 90px;
-  height: 90px;
-  display: block;
-}
-
-/* ---------- HEADER ---------- */
 header {
   background: linear-gradient(135deg, var(--primary), #d4145a);
   color: white;
   text-align: center;
-  padding: 30px 15px;
+  padding: 40px 15px;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2.7rem;
-}
-
-/* ---------- MAIN ---------- */
 .container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 40px 20px;
+  max-width: 500px;
+  margin: -30px auto 40px;
+  padding: 0 20px;
 }
 
 .card {
   background: white;
-  max-width: 500px;
-  margin: auto;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-  animation: rise 0.8s ease-out;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.card img {
+h2 { color: var(--primary); text-align: center; margin-top: 0; }
+
+label { display: block; margin: 15px 0 5px; font-weight: 600; font-size: 0.9rem; }
+
+select, input, textarea, button {
   width: 100%;
-  border-radius: 15px;
-}
-
-.card h2 {
-  color: var(--primary);
-  margin-top: 20px;
-}
-
-.price {
-  font-size: 1.2rem;
-  margin: 10px 0;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 14px;
-  margin: 10px 0;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
   font-size: 1rem;
 }
 
-#paypal-button-container {
-  margin-top: 20px;
-}
-
-footer {
-  background: var(--dark);
-  color: white;
-  text-align: center;
+.price-box {
+  background: #fff0f4;
   padding: 15px;
-  margin-top: 40px;
+  border-radius: 12px;
+  margin: 15px 0;
+  text-align: center;
+  border: 1px solid #ffcada;
 }
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.total-amount {
+  font-size: 1.4rem;
+  color: var(--primary);
+  font-weight: bold;
 }
+
+/* PayPal Section */
+.paypal-section {
+  display: none; /* Shows after clicking Place Order */
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 2px dashed #eee;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.qr-img {
+  width: 220px;
+  height: auto;
+  border: 8px solid white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin: 15px 0;
+}
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover { background: #8e0e3b; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #888; }
 </style>
 </head>
 
 <body>
 
-<!-- QR CODE -->
-<div class="qr-float">
-  <img src="qr-code.png" alt="Pay with QR">
-</div>
-
 <header>
-  <h1>NKBouquets</h1>
-  <p>Luxury Handcrafted Rose Bouquets 🌹</p>
+  <h1 style="margin:0">NKBouquets</h1>
+  <p style="margin:5px 0 0">Custom Rose Bouquets</p>
 </header>
 
 <div class="container">
   <div class="card">
+    <h2>Order Details</h2>
+    
+    <label>Choose Bouquet Size</label>
+    <select id="bouquet">
+      <option value="5" data-roses="3">£5 – 3 Roses</option>
+      <option value="10" data-roses="7">£10 – 7 Roses</option>
+      <option value="15" data-roses="12">£15 – 12 Roses</option>
+      <option value="20" data-roses="15">£20 – 15 Roses</option>
+      <option value="25" data-roses="18">£25 – 18 Roses</option>
+      <option value="30" data-roses="20">£30 – 20 Roses</option>
+    </select>
 
-    <img src="https://images.unsplash.com/photo-1526045478516-99145907023c" alt="Rose Bouquet">
+    <div class="price-box" id="priceDisplay">
+      </div>
 
-    <h2>Luxury Rose Bouquet</h2>
-    <p class="price">
-      Bouquet: £25.00<br>
-      Delivery: £5.00<br>
-      <strong>Total: £30.00</strong>
-    </p>
+    <input id="userName" placeholder="Your Name" required>
+    <textarea id="address" rows="3" placeholder="Full Delivery Address" required></textarea>
 
-    <input id="name" placeholder="Your Name" required>
-    <input id="email" type="email" placeholder="Your Email" required>
-    <textarea id="address" placeholder="Delivery address & notes" required></textarea>
+    <button onclick="handleOrder()">Show Payment QR Code</button>
 
-    <div id="paypal-button-container"></div>
+    <div id="paypalArea" class="paypal-section">
+      <strong style="color: var(--paypal-blue);">Scan to Pay via PayPal</strong>
+      <br>
+      <img src="pp_my_qrcode_1767619571632.jpeg" alt="PayPal QR Code" class="qr-img">
+      <p style="font-size: 0.9rem; color: #555;">
+        Scan the code to pay <strong>Zehra Jabeen</strong>.<br>
+        Please include your name in the PayPal note!
+      </p>
+    </div>
 
   </div>
 </div>
 
-<footer>
-  © 2026 NKBouquets • Fresh Roses Made With Love
-</footer>
+<footer>© 2026 NKBouquets</footer>
 
 <script>
-paypal.Buttons({
-  style: {
-    layout: 'vertical',
-    shape: 'pill'
-  },
+const bouquetSelect = document.getElementById('bouquet');
+const priceDisplay = document.getElementById('priceDisplay');
+const paypalArea = document.getElementById('paypalArea');
+const deliveryFee = 5;
 
-  createOrder: function(data, actions) {
-    return actions.order.create({
-      purchase_units: [{
-        amount: {
-          currency_code: 'GBP',
-          value: '30.00',
-          breakdown: {
-            item_total: { value: '25.00', currency_code: 'GBP' },
-            shipping: { value: '5.00', currency_code: 'GBP' }
-          }
-        },
-        items: [{
-          name: 'Luxury Rose Bouquet',
-          unit_amount: { value: '25.00', currency_code: 'GBP' },
-          quantity: '1'
-        }]
-      }]
-    });
-  },
+function updatePrice() {
+  const price = Number(bouquetSelect.value);
+  const roses = bouquetSelect.selectedOptions[0].dataset.roses;
+  const total = price + deliveryFee;
 
-  onApprove: function(data, actions) {
-    return actions.order.capture().then(function(details) {
-      alert('Thank you! Your order has been placed successfully.');
-    });
+  priceDisplay.innerHTML = `
+    ${roses} Roses: £${price}<br>
+    Delivery: £${deliveryFee}<br>
+    <span class="total-amount">Total: £${total}</span>
+  `;
+}
+
+function handleOrder() {
+  const name = document.getElementById('userName').value;
+  const addr = document.getElementById('address').value;
+
+  if(!name || !addr) {
+    alert("Please enter your name and address first.");
+    return;
   }
-}).render('#paypal-button-container');
+
+  // Show the QR Code
+  paypalArea.style.display = 'block';
+  
+  // Smooth scroll to QR code
+  paypalArea.scrollIntoView({ behavior: 'smooth' });
+
+  // Optional: Trigger email log for your records
+  const total = Number(bouquetSelect.value) + deliveryFee;
+  const subject = encodeURIComponent("Bouquet Order: " + name);
+  const body = encodeURIComponent(`Name: ${name}\nAddress: ${addr}\nTotal: £${total}\nStatus: Awaiting PayPal Payment`);
+  
+  // This opens the email app so you get a record of the order
+  window.location.href = `mailto:hzeb0733@gmail.com?subject=${subject}&body=${body}`;
+}
+
+bouquetSelect.addEventListener('change', updatePrice);
+updatePrice();
 </script>
 
 </body>
