@@ -5,208 +5,194 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NKBouquets | Luxury Roses</title>
 
+<!-- PAYPAL LIVE SDK -->
+<!-- 🔴 REPLACE YOUR_LIVE_CLIENT_ID with your real PayPal LIVE client ID -->
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_LIVE_CLIENT_ID&currency=GBP"></script>
+
 <style>
 :root {
   --primary: #b1124a;
-  --secondary: #ffb3c6;
+  --bg: #fff5f7;
   --dark: #2b0a15;
-  --light: #fff5f7;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: var(--light);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
   color: #222;
-  scroll-behavior: smooth;
+}
+
+/* ---------- QR CODE ---------- */
+.qr-float {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: white;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  z-index: 999;
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+.qr-float:hover {
+  transform: scale(1.05);
+}
+
+.qr-float img {
+  width: 90px;
+  height: 90px;
+  display: block;
 }
 
 /* ---------- HEADER ---------- */
 header {
   background: linear-gradient(135deg, var(--primary), #d4145a);
   color: white;
-  padding: 30px 20px;
   text-align: center;
+  padding: 30px 15px;
 }
 
 header h1 {
   margin: 0;
-  font-size: 2.8rem;
-  letter-spacing: 1px;
-}
-
-header p {
-  opacity: 0.9;
+  font-size: 2.7rem;
 }
 
 /* ---------- MAIN ---------- */
 .container {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: auto;
   padding: 40px 20px;
 }
 
-.hero {
-  text-align: center;
-  animation: fadeUp 0.8s ease-out;
-}
-
-.hero img {
-  width: 100%;
-  max-width: 480px;
+.card {
+  background: white;
+  max-width: 500px;
+  margin: auto;
+  padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-  transform: translateZ(0);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  animation: rise 0.8s ease-out;
 }
 
-.hero h2 {
+.card img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.card h2 {
   color: var(--primary);
-  margin-top: 25px;
-  font-size: 2rem;
+  margin-top: 20px;
 }
 
 .price {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin: 10px 0;
 }
 
-.price span {
-  display: block;
-  font-size: 1rem;
-  color: #555;
-}
-
-/* ---------- ORDER CARD ---------- */
-.order-box {
-  background: white;
-  margin: 40px auto;
-  max-width: 520px;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.12);
-  animation: fadeUp 1s ease-out;
-}
-
-.order-box h3 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.order-box input,
-.order-box textarea {
+input, textarea {
   width: 100%;
   padding: 14px;
-  margin-bottom: 15px;
+  margin: 10px 0;
   border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 1rem;
 }
 
-.order-box textarea {
-  resize: vertical;
-  min-height: 90px;
+#paypal-button-container {
+  margin-top: 20px;
 }
 
-/* ---------- PAYPAL BUTTON ---------- */
-.paypal-btn {
-  text-align: center;
-  margin-top: 15px;
-}
-
-.paypal-btn input {
-  transform: scale(1);
-  transition: transform 0.2s ease;
-}
-
-.paypal-btn input:hover {
-  transform: scale(1.05);
-}
-
-/* ---------- FOOTER ---------- */
 footer {
   background: var(--dark);
   color: white;
   text-align: center;
-  padding: 18px;
-  font-size: 0.9rem;
+  padding: 15px;
+  margin-top: 40px;
 }
 
-/* ---------- ANIMATIONS ---------- */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 
 <body>
 
+<!-- QR CODE -->
+<div class="qr-float">
+  <img src="qr-code.png" alt="Pay with QR">
+</div>
+
 <header>
   <h1>NKBouquets</h1>
-  <p>Handcrafted Luxury Rose Bouquets 🌹</p>
+  <p>Luxury Handcrafted Rose Bouquets 🌹</p>
 </header>
 
 <div class="container">
+  <div class="card">
 
-  <div class="hero">
     <img src="https://images.unsplash.com/photo-1526045478516-99145907023c" alt="Rose Bouquet">
+
     <h2>Luxury Rose Bouquet</h2>
     <p class="price">
-      £25.00
-      <span>+ £5.00 delivery</span>
+      Bouquet: £25.00<br>
+      Delivery: £5.00<br>
+      <strong>Total: £30.00</strong>
     </p>
+
+    <input id="name" placeholder="Your Name" required>
+    <input id="email" type="email" placeholder="Your Email" required>
+    <textarea id="address" placeholder="Delivery address & notes" required></textarea>
+
+    <div id="paypal-button-container"></div>
+
   </div>
-
-  <div class="order-box">
-    <h3>Order Now</h3>
-
-    <!-- PAYPAL FORM -->
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-
-      <!-- REQUIRED PAYPAL FIELDS -->
-      <input type="hidden" name="cmd" value="_cart">
-      <input type="hidden" name="upload" value="1">
-      <input type="hidden" name="business" value="hzeb0733@gmail.com">
-      <input type="hidden" name="currency_code" value="GBP">
-
-      <!-- ITEM -->
-      <input type="hidden" name="item_name_1" value="Luxury Rose Bouquet">
-      <input type="hidden" name="amount_1" value="25.00">
-      <input type="hidden" name="quantity_1" value="1">
-
-      <!-- DELIVERY -->
-      <input type="hidden" name="shipping_1" value="5.00">
-
-      <!-- CUSTOMER INFO -->
-      <input type="text" name="custom" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="address" placeholder="Delivery address & notes" required></textarea>
-
-      <div class="paypal-btn">
-        <input type="image"
-          src="https://www.paypalobjects.com/en_GB/i/btn/btn_paynowCC_LG.gif"
-          name="submit"
-          alt="Pay with PayPal">
-      </div>
-
-    </form>
-  </div>
-
 </div>
 
 <footer>
-  © 2026 NKBouquets • Fresh Roses • Made With Love
+  © 2026 NKBouquets • Fresh Roses Made With Love
 </footer>
+
+<script>
+paypal.Buttons({
+  style: {
+    layout: 'vertical',
+    shape: 'pill'
+  },
+
+  createOrder: function(data, actions) {
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          currency_code: 'GBP',
+          value: '30.00',
+          breakdown: {
+            item_total: { value: '25.00', currency_code: 'GBP' },
+            shipping: { value: '5.00', currency_code: 'GBP' }
+          }
+        },
+        items: [{
+          name: 'Luxury Rose Bouquet',
+          unit_amount: { value: '25.00', currency_code: 'GBP' },
+          quantity: '1'
+        }]
+      }]
+    });
+  },
+
+  onApprove: function(data, actions) {
+    return actions.order.capture().then(function(details) {
+      alert('Thank you! Your order has been placed successfully.');
+    });
+  }
+}).render('#paypal-button-container');
+</script>
 
 </body>
 </html>
